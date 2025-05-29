@@ -1,24 +1,25 @@
 #pragma once
+#include "stdexcept"
 #include <ostream>
-
 //Opgave 1 a )
 
 class Fraction {
-    friend Fraction operator+(Fraction f1, Fraction f2);
-    friend std::ostream& operator<<(std::ostream& os, Fraction fraction);
 
-    private:
+  //Opgave 1 d )
+  friend void operator<<(std::ostream &os, Fraction fraction);
+
+  //Opgave 1 f)
+  friend Fraction operator+(Fraction frac1, Fraction frac2);
+
+  private:
     int nominator;
     int denominator;
 
-    public:
+  public: 
     Fraction(int nominator = 1, int denominator = 1);
     int getNominator() const;
     int getDenominator() const;
-
-    bool operator==(Fraction fraction) const;
+    bool operator==(Fraction const fraction) const;
 };
 
-//Opgave 1 d )
 
-//Opgave 1 f)

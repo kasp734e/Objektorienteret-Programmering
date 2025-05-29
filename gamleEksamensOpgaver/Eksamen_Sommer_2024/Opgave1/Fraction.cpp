@@ -1,34 +1,41 @@
 
 //Opgave 1 b)
 #include "Fraction.h"
-#include <stdexcept>
-Fraction::Fraction(int nominator, int denominator) : nominator{nominator}, denominator{denominator} {
-    if (denominator == 0) {
-        throw std::invalid_argument("Denominator cannot be 0");
-    }
+
+Fraction::Fraction(int nominator, int denominator) {
+  if (denominator == 0) {
+    throw std::invalid_argument("Denominator cannot be zero");
+  } else {
+    this->nominator = nominator;
+    this->denominator = denominator;
+  }
 }
+
 int Fraction::getNominator() const {
-    return this->nominator;
+  return this->nominator;
 }
+
 int Fraction::getDenominator() const {
-    return this->denominator;
+  return this->denominator;
 }
-bool Fraction::operator==(Fraction fraction) const {
-        if (fraction.getDenominator()*this->nominator==fraction.getNominator()*this->denominator) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+
+bool Fraction::operator==(Fraction const fraction) const {
+  if ((fraction.denominator*this->nominator)==(fraction.nominator*this->denominator)) {
+    return true;
+  } else {
+    return false;
+  }
+}
 
 //Opgave 1 d)
-std::ostream& operator<<(std::ostream& os, Fraction fraction) {
-    os << fraction.getNominator() << "/" << fraction.getDenominator();
-    return os;
+
+void operator<<(std::ostream &os, Fraction fraction) {
+  os << std::to_string(fraction.nominator) << "/"<< std::to_string(fraction.denominator);
 }
+
 //Opgave 1 f)
 
-Fraction operator+(Fraction f1, Fraction f2) {
-    Fraction newF(f1.nominator*f2.denominator+f2.nominator*f1.denominator, f1.denominator*f2.denominator);
-    return newF;
+Fraction operator+(Fraction frac1, Fraction frac2) {
+  Fraction newFrac(((frac1.nominator*frac2.denominator)+(frac2.nominator*frac1.denominator)),(frac1.denominator*frac2.denominator));
+  return newFrac;
 }
